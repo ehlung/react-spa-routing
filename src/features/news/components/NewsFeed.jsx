@@ -6,6 +6,7 @@ export default function NewsFeed({
   onMarkRead,
   isBookmarked,
   onToggleBookmark,
+  highlightQuery = "",
 }) {
   return (
     <div>
@@ -17,6 +18,7 @@ export default function NewsFeed({
           bookmarked={isBookmarked(article.id)}
           onMarkRead={onMarkRead}
           onToggleBookmark={onToggleBookmark}
+          highlightQuery={highlightQuery}
         />
       ))}
     </div>

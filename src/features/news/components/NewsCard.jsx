@@ -1,9 +1,12 @@
+import { highlightText } from "../utils/highlight";
+
 export default function NewsCard({
   article,
   read,
   bookmarked,
   onMarkRead,
   onToggleBookmark,
+  highlightQuery = "",
 }) {
   const { title, description, imageUrl, url, hasImage, hasDescription } =
     article;
@@ -73,10 +76,16 @@ export default function NewsCard({
 
       {/* 텍스트 영역 */}
       <div className="min-w-0 pr-10">
-        <h3 className="font-semibold leading-snug">{title}</h3>
+        <h3 className="font-semibold leading-snug">
+          {title}
+          {highlightText(title, highlightQuery)}
+        </h3>
 
         {hasDescription && (
-          <p className="mt-1 text-sm text-gray-600">{description}</p>
+          <p className="mt-1 text-sm text-gray-600">
+            {description}
+            {highlightText(description, highlightQuery)}
+          </p>
         )}
       </div>
     </a>
