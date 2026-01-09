@@ -8,8 +8,25 @@ export default function NewsCard({
   const { title, description, imageUrl, url, hasImage, hasDescription } =
     article;
 
-  const handleOpen = () => {
+  const handleOpen = (e) => {
     onMarkRead(article.id);
+
+    const shouldWarn =
+      !article.url || !article.isValidUrl || article.isSuspiciousUrl;
+
+    if (shouldWarn) {
+      e.preventDefault();
+
+      const ok = window.confirm(
+        "해당 뉴스는 원문 링크가 제한되거나 정상적으로 열리지 않을 수 있습니다.\n그래도 이동하시겠습니까?"
+      );
+
+      if (!ok) return;
+
+      if (article.url && article.isValidUrl) {
+        window.open(article.url, "_blank", "noreferrer");
+      }
+    }
   };
 
   const handleBookmarkClick = (e) => {
@@ -20,7 +37,7 @@ export default function NewsCard({
 
   return (
     <a
-      href={url}
+      href={article.isValidUrl ? url : "#"}
       target="_blank"
       rel="noreferrer"
       onClick={handleOpen}
