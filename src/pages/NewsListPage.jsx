@@ -10,7 +10,7 @@ export default function NewsListPage() {
   const { category } = useParams();
   const { query } = useSearchQuery();
 
-  const { articles, isLoading, error } = useArticles({
+  const { articles, error } = useArticles({
     category: category || "general",
     q: "",
   });
@@ -29,7 +29,6 @@ export default function NewsListPage() {
   const { isRead, markRead } = useReadArticles();
   const { isBookmarked, toggleBookmark } = useBookmarks();
 
-  if (isLoading) return <p>로딩 중...</p>;
   if (error) return <p>에러 발생</p>;
 
   return (
