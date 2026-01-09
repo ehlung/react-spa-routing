@@ -26,7 +26,8 @@ export default function NewsCard({
       onClick={handleOpen}
       className={[
         "relative flex gap-4 border-b py-4 transition",
-        "hover:bg-gray-50",
+        "border-zinc-200 hover:bg-gray-50",
+        "dark:border-zinc-800 dark:hover:bg-zinc-900/40",
         read ? "opacity-60" : "opacity-100",
       ].join(" ")}
     >
