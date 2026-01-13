@@ -17,18 +17,24 @@ export default function NewsCard({
     const shouldWarn =
       !article.url || !article.isValidUrl || article.isSuspiciousUrl;
 
-    if (shouldWarn) {
-      e.preventDefault();
+    if (!shouldWarn) return;
 
-      const ok = window.confirm(
-        "해당 뉴스는 원문 링크가 제한되거나 정상적으로 열리지 않을 수 있습니다.\n그래도 이동하시겠습니까?"
-      );
+    const hideWarning = localStorage.getItem("hideInvalidNewsWarning");
 
-      if (!ok) return;
+    if (hideWarning === "true") return;
 
-      if (article.url && article.isValidUrl) {
-        window.open(article.url, "_blank", "noreferrer");
-      }
+    e.preventDefault();
+
+    const ok = window.confirm(
+      "해당 뉴스는 원문 링크가 제한되거나 정상적으로 열리지 않을 수 있습니다.\n그래도 이동하시겠습니까?\n(확인 시 이후에는 표시되지 않습니다.)"
+    );
+
+    if (!ok) return;
+
+    localStorage.setItem("hideInvalidNewsWarning", "true");
+
+    if (article.url && article.isValidUrl) {
+      window.open(article.url, "_blank", "noreferrer");
     }
   };
 
