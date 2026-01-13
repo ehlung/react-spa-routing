@@ -4,7 +4,7 @@ export default function NewsFeed({
   articles,
   isRead,
   onMarkRead,
-  isBookmarked,
+  checkIsBookmarked,
   onToggleBookmark,
   highlightQuery = "",
 }) {
@@ -15,7 +15,7 @@ export default function NewsFeed({
           key={article.id}
           article={article}
           read={isRead(article.id)}
-          bookmarked={isBookmarked(article.id)}
+          bookmarked={checkIsBookmarked(article.id)}
           onMarkRead={onMarkRead}
           onToggleBookmark={onToggleBookmark}
           highlightQuery={highlightQuery}

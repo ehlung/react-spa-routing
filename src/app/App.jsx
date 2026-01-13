@@ -5,12 +5,12 @@ import { useBookmarks } from "../features/bookmarks/hooks/useBookmarks";
 import ThemeToggle from "../components/ThemeToggle";
 
 export default function App() {
-  const { articles, isLoading, error } = useArticles({ category: "general" });
+  const { articles, isLoading, iserror } = useArticles({ category: "general" });
   const { isRead, markRead } = useReadArticles();
-  const { isBookmarked, toggleBookmark } = useBookmarks();
+  const { checkIsBookmarked, toggleBookmark } = useBookmarks();
 
   if (isLoading) return <p className="p-6">로딩 중...</p>;
-  if (error) return <p className="p-6">에러 발생</p>;
+  if (iserror) return <p className="p-6">에러 발생</p>;
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
@@ -24,7 +24,7 @@ export default function App() {
           articles={articles}
           isRead={isRead}
           onMarkRead={markRead}
-          isBookmarked={isBookmarked}
+          checkIsBookmarked={checkIsBookmarked}
           onToggleBookmark={toggleBookmark}
         />
       </div>
