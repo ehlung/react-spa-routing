@@ -37,7 +37,7 @@ export default function NewsListPage() {
       articles={filtered}
       isRead={isRead}
       onMarkRead={markRead}
-      isBookmarked={isBookmarked}
+      checkIsBookmarked={isBookmarked}
       onToggleBookmark={toggleBookmark}
       highlightQuery={query}
     />

@@ -7,7 +7,7 @@ import ThemeToggle from "../components/ThemeToggle";
 export default function App() {
   const { articles, isLoading, iserror } = useArticles({ category: "general" });
   const { isRead, markRead } = useReadArticles();
-  const { checkIsBookmarked, toggleBookmark } = useBookmarks();
+  const { isBookmarked, toggleBookmark } = useBookmarks();
 
   if (isLoading) return <p className="p-6">로딩 중...</p>;
   if (iserror) return <p className="p-6">에러 발생</p>;
@@ -24,7 +24,7 @@ export default function App() {
           articles={articles}
           isRead={isRead}
           onMarkRead={markRead}
-          checkIsBookmarked={checkIsBookmarked}
+          checkIsBookmarked={isBookmarked}
           onToggleBookmark={toggleBookmark}
         />
       </div>

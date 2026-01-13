@@ -1,27 +1,33 @@
 import { useCallback, useEffect, useState } from "react";
-import { getBookmarksMap, setBookmarksMap } from "../storage/bookmarksStorage";
+import {
+  getBookmarkedArticlesById,
+  setBookmarkedArticlesById,
+} from "../storage/bookmarksStorage";
 
 export function useBookmarks() {
-  const [map, setMap] = useState({});
+  const [bookmarkedById, setbookmarkedById] = useState({});
 
   useEffect(() => {
-    setMap(getBookmarksMap());
+    setbookmarkedById(getBookmarkedArticlesById());
   }, []);
 
-  const isBookmarked = useCallback((id) => Boolean(map[id]), [map]);
+  const isBookmarked = useCallback(
+    (id) => Boolean(bookmarkedById[id]),
+    [bookmarkedById]
+  );
 
   const toggleBookmark = useCallback((article) => {
-    setMap((prev) => {
+    setbookmarkedById((prev) => {
       const next = { ...prev };
       if (next[article.id]) delete next[article.id];
       else next[article.id] = article;
 
-      setBookmarksMap(next);
+      setBookmarkedArticlesById(next);
       return next;
     });
   }, []);
 
-  const bookmarks = Object.values(map);
+  const bookmarks = Object.values(bookmarkedById);
 
   return { bookmarks, isBookmarked, toggleBookmark };
 }

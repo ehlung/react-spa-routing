@@ -19,7 +19,7 @@ export default function BookmarksPage() {
           articles={bookmarks}
           isRead={isRead}
           onMarkRead={markRead}
-          isBookmarked={isBookmarked}
+          checkIsBookmarked={isBookmarked}
           onToggleBookmark={toggleBookmark}
         />
       )}
